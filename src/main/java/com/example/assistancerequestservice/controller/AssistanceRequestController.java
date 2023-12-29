@@ -5,6 +5,7 @@ import com.example.assistancerequestservice.model.AssistanceRequest;
 import com.example.assistancerequestservice.response.AssistanceRequestResponseDto;
 import com.example.assistancerequestservice.service.AssistanceRequestService;
 import com.example.assistancerequestservice.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class AssistanceRequestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<AssistanceRequestResponseDto> createAssistanceRequest(@RequestBody AssistanceRequestDto assistanceRequestDto) {
+    public ResponseEntity<AssistanceRequestResponseDto> createAssistanceRequest(@Valid @RequestBody AssistanceRequestDto assistanceRequestDto) {
         AssistanceRequest createdAssistanceRequest = assistanceRequestService.createAssistanceRequest(assistanceRequestDto);
         AssistanceRequestResponseDto responseDto = assistanceRequestService.getAssistanceRequest(createdAssistanceRequest.getId());
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
