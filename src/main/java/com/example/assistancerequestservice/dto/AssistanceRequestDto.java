@@ -1,9 +1,9 @@
 package com.example.assistancerequestservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 @Data
 public class AssistanceRequestDto {
@@ -25,5 +25,6 @@ public class AssistanceRequestDto {
     private String expressNeeds;
 
     @NotNull(message = "Disaster ID is required")
-    private Long DisasterId;
+    @JsonProperty("disasterId")
+    private Long disasterId;
 }
