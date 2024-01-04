@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/assistancerequest")
 public class AssistanceRequestController {
 
     private final AssistanceRequestService assistanceRequestService;
@@ -29,7 +28,7 @@ public class AssistanceRequestController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<AssistanceRequestResponseDto> createAssistanceRequest(@Valid @RequestBody AssistanceRequestDto assistanceRequestDto) {
         System.out.println(assistanceRequestDto);
         AssistanceRequest createdAssistanceRequest = assistanceRequestService.createAssistanceRequest(assistanceRequestDto);
