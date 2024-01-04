@@ -22,18 +22,17 @@ public class AssistanceRequestController {
     @Value("${other.service.url}")
     private String authService;
 
-    @Autowired
     public AssistanceRequestController(AssistanceRequestService assistanceRequestService, UserService userService) {
         this.assistanceRequestService = assistanceRequestService;
         this.userService = userService;
     }
 
     @PostMapping("/")
-    public ResponseEntity<AssistanceRequestResponseDto> createAssistanceRequest(@Valid @RequestBody AssistanceRequestDto assistanceRequestDto) {
+    public ResponseEntity<?> createAssistanceRequest(@Valid @RequestBody AssistanceRequestDto assistanceRequestDto) {
         System.out.println(assistanceRequestDto);
         AssistanceRequest createdAssistanceRequest = assistanceRequestService.createAssistanceRequest(assistanceRequestDto);
         AssistanceRequestResponseDto responseDto = assistanceRequestService.getAssistanceRequest(createdAssistanceRequest.getId());
-        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body("created");
     }
 
     @GetMapping("/{id}")

@@ -55,12 +55,15 @@ public class AssistanceRequestImpl implements AssistanceRequestService {
             assistanceRequest.setLocalisation(point);
             assistanceRequest.setExpressNeeds(assistanceRequestDto.getExpressNeeds());
 
+
             Disaster disaster = getDisaster(assistanceRequestDto.getDisasterId());
 
             List<Zone> zones = disaster.getZones();
             Zone associatedZone = findAssociatedZone(assistanceRequest.getLocalisation(), zones);
 
             if (associatedZone == null) {
+                System.out.println("hello salah");
+
                 throw new ZoneNotFoundException();
             }
 
