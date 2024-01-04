@@ -30,10 +30,11 @@ public class AssistanceRequestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<AssistanceRequestResponseDto> createAssistanceRequest(@Valid @RequestBody AssistanceRequestDto assistanceRequestDto) {
+    public ResponseEntity<AssistanceRequestResponseDto> createAssistanceRequest( @RequestBody AssistanceRequestDto assistanceRequestDto) {
         System.out.println(assistanceRequestDto);
         AssistanceRequest createdAssistanceRequest = assistanceRequestService.createAssistanceRequest(assistanceRequestDto);
-        return new ResponseEntity<>( HttpStatus.CREATED);
+        AssistanceRequestResponseDto responseDto = assistanceRequestService.getAssistanceRequest(createdAssistanceRequest.getId());
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
