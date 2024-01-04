@@ -33,8 +33,7 @@ public class AssistanceRequestController {
     public ResponseEntity<AssistanceRequestResponseDto> createAssistanceRequest(@Valid @RequestBody AssistanceRequestDto assistanceRequestDto) {
         System.out.println(assistanceRequestDto);
         AssistanceRequest createdAssistanceRequest = assistanceRequestService.createAssistanceRequest(assistanceRequestDto);
-        AssistanceRequestResponseDto responseDto = assistanceRequestService.getAssistanceRequest(createdAssistanceRequest.getId());
-        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
+        return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
