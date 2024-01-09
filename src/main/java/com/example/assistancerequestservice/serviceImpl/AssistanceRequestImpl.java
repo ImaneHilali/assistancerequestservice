@@ -94,31 +94,17 @@ public class AssistanceRequestImpl implements AssistanceRequestService {
     }
 
     public AssistanceRequestResponseDto getAssistanceRequest(Long id) {
-        try {
             AssistanceRequest assistanceRequest = assistanceRequestRepository.findById(id)
                     .orElseThrow(AssistanceRequestNotFoundException::new);
-
-            Disaster disaster = getDisaster(assistanceRequest.getZone().getId());
-
-            List<Zone> zones = disaster.getZones();
-            Zone associatedZone = findAssociatedZone(assistanceRequest.getLocalisation(), zones);
-
-            if (associatedZone == null) {
-                throw new ZoneNotFoundException();
-            }
-            assistanceRequest.setZone(associatedZone);
 
             AssistanceRequestResponseDto assistanceRequestResponseDto = new AssistanceRequestResponseDto();
 
             assistanceRequestResponseDto.setLocalisation(assistanceRequest.getLocalisation());
-
-            BeanUtils.copyProperties(assistanceRequest, assistanceRequestResponseDto);
-
+            assistanceRequestResponseDto.setId(assistanceRequest.getId());
+            assistanceRequestResponseDto.setLocalisation(assistanceRequest.getLocalisation());
+            assistanceRequestResponseDto.setAddress(assistanceRequest.getAddress());
+            assistanceRequestResponseDto.setExpressNeeds(assistanceRequest.getExpressNeeds());
             return assistanceRequestResponseDto;
-        } catch (AssistanceRequestNotFoundException | DisasterNotFoundException | ZoneNotFoundException e) {
-            e.printStackTrace();
-            throw e;
-        }
     }
 
 }
