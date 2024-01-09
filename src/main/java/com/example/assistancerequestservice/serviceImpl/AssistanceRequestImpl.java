@@ -98,7 +98,8 @@ public class AssistanceRequestImpl implements AssistanceRequestService {
                     .orElseThrow(AssistanceRequestNotFoundException::new);
 
             AssistanceRequestResponseDto assistanceRequestResponseDto = new AssistanceRequestResponseDto();
-
+            assistanceRequestResponseDto.setFullname(assistanceRequest.getFullname());
+            assistanceRequestResponseDto.setPhone(assistanceRequest.getPhone());
             assistanceRequestResponseDto.setLocalisation(assistanceRequest.getLocalisation());
             assistanceRequestResponseDto.setId(assistanceRequest.getId());
             assistanceRequestResponseDto.setLocalisation(assistanceRequest.getLocalisation());
