@@ -60,6 +60,11 @@ public class AssistanceRequestImpl implements AssistanceRequestService {
 
             List<Zone> zones = disaster.getZones();
 
+
+            for(Zone zone : zones){
+                System.out.println(zone.getId());
+            }
+
             Zone associatedZone = findAssociatedZone(assistanceRequest.getLocalisation(), zones);
 
             if (associatedZone == null) {
