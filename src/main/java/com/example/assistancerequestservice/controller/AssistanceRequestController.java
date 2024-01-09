@@ -30,8 +30,7 @@ public class AssistanceRequestController {
     @PostMapping("/")
     public ResponseEntity<?> createAssistanceRequest(@Valid @RequestBody AssistanceRequestDto assistanceRequestDto) {
         System.out.println(assistanceRequestDto);
-        AssistanceRequest createdAssistanceRequest = assistanceRequestService.createAssistanceRequest(assistanceRequestDto);
-        AssistanceRequestResponseDto responseDto = assistanceRequestService.getAssistanceRequest(createdAssistanceRequest.getId());
+        assistanceRequestService.createAssistanceRequest(assistanceRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body("created");
     }
 
