@@ -59,10 +59,10 @@ public class AssistanceRequestImpl implements AssistanceRequestService {
             Disaster disaster = getDisaster(assistanceRequestDto.getDisasterId());
 
             List<Zone> zones = disaster.getZones();
+
             Zone associatedZone = findAssociatedZone(assistanceRequest.getLocalisation(), zones);
 
             if (associatedZone == null) {
-                System.out.println("hello salah");
 
                 throw new ZoneNotFoundException();
             }
@@ -78,6 +78,7 @@ public class AssistanceRequestImpl implements AssistanceRequestService {
     public Zone findAssociatedZone(Point localisation, List<Zone> zones) {
         for (Zone zone : zones) {
             if (this.isPointInside(localisation,zone)) {
+                System.out.println(zone.getId());
                 return zone;
             }
         }
