@@ -12,6 +12,7 @@ import com.example.assistancerequestservice.dto.PointDto;
 import com.example.assistancerequestservice.exception.AssistanceRequestNotFoundException;
 import com.example.assistancerequestservice.exception.*;
 import com.example.assistancerequestservice.service.AssistanceRequestService;
+import jakarta.transaction.Transactional;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -40,6 +41,8 @@ public class AssistanceRequestImpl implements AssistanceRequestService {
                 DisasterNotFoundException::new);
     }
 
+
+    @Transactional
     @Override
     public AssistanceRequest createAssistanceRequest(AssistanceRequestDto assistanceRequestDto) {
         try {
@@ -83,7 +86,7 @@ public class AssistanceRequestImpl implements AssistanceRequestService {
     public Zone findAssociatedZone(Point localisation, List<Zone> zones) {
         for (Zone zone : zones) {
             if (this.isPointInside(localisation,zone)) {
-                System.out.println(zone.getId());
+                System.out.println(zone!=null);
                 return zone;
             }
         }
