@@ -70,10 +70,6 @@ public class AssistanceRequestImpl implements AssistanceRequestService {
 
             Zone associatedZone = findAssociatedZone(assistanceRequest.getLocalisation(), zones);
 
-            if (associatedZone == null) {
-
-                throw new ZoneNotFoundException();
-            }
 
             assistanceRequest.setZone(associatedZone);
 
@@ -86,11 +82,10 @@ public class AssistanceRequestImpl implements AssistanceRequestService {
     public Zone findAssociatedZone(Point localisation, List<Zone> zones) {
         for (Zone zone : zones) {
             if (this.isPointInside(localisation,zone)) {
-                System.out.println(zone!=null);
                 return zone;
             }
         }
-        return null;
+        throw new ZoneNotFoundException();
     }
 
     public boolean isPointInside(Point point, Zone zone) {
